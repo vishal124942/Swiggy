@@ -32,7 +32,7 @@ const Login = () => {
       setIsAuthenticated(true);
       setloading(false);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error("Invalid Credentials");
       console.log(error);
       setIsAuthenticated(false);
       setloading(false);
