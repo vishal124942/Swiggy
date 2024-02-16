@@ -32,7 +32,7 @@ const Body = () => {
     fetchData();
     return;
   }, []);
-  if (!IsAuthenticated) navigate("/login");
+  if (!IsAuthenticated) navigate("/");
   return listofRestaurants.length === 0 ? (
     <Shimmer />
   ) : (

@@ -48,9 +48,9 @@ const Register = () => {
           <h1 className="ml-3">Username</h1>
           <input
             className="w-48 rounded-md h-8 ml-3 border-2 border-black shadow-md"
-            type="email"
+            type="text"
             placeholder="username"
-            value={email}
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>

@@ -17,7 +17,7 @@ const RestaurantMenu = () => {
   const fetchData = async () => {
     try {
       const fetchedData = await fetch(
-        "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7040592&lng=77.10249019999999&restaurantId=" +
+        " https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.746211029596637&lng=77.11815845221281&restaurantId=" +
           urlID +
           "&catalog_qa=undefined&submitAction=ENTER"
       );
