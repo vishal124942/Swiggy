@@ -1,9 +1,12 @@
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard.js";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer.js";
-import Useractivity from "../utils/useOnlineStatus.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../App.js";
+
 const Body = () => {
+  const navigate = useNavigate();
+  const { IsAuthenticated } = useContext(Context);
   const [listofRestaurants, setlistofRestaurants] = useState([]);
   const [filteredRestaurant, setfilteredRestaurant] = useState([]);
   const [searchText, setsearchText] = useState([]);
@@ -16,7 +19,6 @@ const Body = () => {
       );
 
       const json = await data.json();
-      console.log("jh");
       const restaurant =
         json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
@@ -28,12 +30,9 @@ const Body = () => {
   };
   useEffect(() => {
     fetchData();
+    return;
   }, []);
-  const OnlineStatus = Useractivity();
-  if (OnlineStatus === false)
-    return (
-      <h1>Looks like your Interconnection Failed Please Try again Once</h1>
-    );
+  if (!IsAuthenticated) navigate("/login");
   return listofRestaurants.length === 0 ? (
     <Shimmer />
   ) : (

@@ -1,5 +1,10 @@
+import { Navigate } from "react-router-dom";
+import { Context } from "../App";
+import { useContext } from "react";
+
 export const About = () => {
-  return (
+  const { IsAuthenticated } = useContext(Context);
+  return IsAuthenticated ? (
     <div>
       <div className="bg-orange-500 h-[350px]">
         <div className="translate-x-[100px]">
@@ -24,5 +29,7 @@ export const About = () => {
         />
       </div>
     </div>
+  ) : (
+    <Navigate to={"/"} />
   );
 };
