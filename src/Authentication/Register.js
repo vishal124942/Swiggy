@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { server } from "../utils/constants";
 import toast from "react-hot-toast";
@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { Context } from "../App";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -75,6 +76,7 @@ const Register = () => {
           />
         </div>
         <button
+          onClick={() => setIsAuthenticated(true)}
           type="submit"
           className="w-20 h-8 font-bold translate-x-6 rounded-md  bg-green-600 text-white"
         >
