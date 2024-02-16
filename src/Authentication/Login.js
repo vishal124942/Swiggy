@@ -29,6 +29,7 @@ const Login = () => {
         }
       );
       toast.success(data.message);
+
       setIsAuthenticated(true);
       setloading(false);
     } catch (error) {
@@ -40,40 +41,48 @@ const Login = () => {
   };
   if (IsAuthenticated) return <Navigate to={"/"} />;
   return (
-    <div className="login">
-      <section>
-        <form onSubmit={submitHandler}>
+    <section className="w-screen h-screen flex justify-center items-center">
+      <form
+        onSubmit={submitHandler}
+        className=" flex flex-col space-y-3 rounded-md bg-white border-2 border-black shadow-xl h-72 w-64"
+      >
+        <h1 className="translate-x-6 mt-3  font-bold text-2xl">LOGIN</h1>
+        <div className="flex flex-col translate-x-3">
+          <h1 className="ml-3">Email</h1>
           <input
+            className="w-48 rounded-md h-8 ml-3 border-2 border-black shadow-md"
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+        </div>
+        <div className="flex flex-col translate-x-3">
+          <h1 className="ml-3">Password</h1>
           <input
+            className="w-48 h-8 ml-3 rounded-md border-2 border-black shadow-md"
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+        </div>
+        <button
+          disabled={loading}
+          type="submit"
+          className="w-20 h-8 font-bold translate-x-6 rounded-md  bg-green-600 text-white"
+        >
+          Login
+        </button>
 
-          <button
-            disabled={loading}
-            type="submit"
-            className="w-16 h-6 bg-black text-white"
-          >
-            Login
+        <div className="flex translate-x-6 space-x-2">
+          <h1>New User ? </h1>
+          <button onClick={() => navigate("/register")} className="font-bold">
+            Create Account
           </button>
-
-          <h4>Or</h4>
-          <button
-            onClick={() => navigate("/register")}
-            className="w-20 h-6 bg-black text-white"
-          >
-            Sign Up
-          </button>
-        </form>
-      </section>
-    </div>
+        </div>
+      </form>
+    </section>
   );
 };
 

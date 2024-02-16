@@ -38,36 +38,56 @@ const Register = () => {
 
   if (IsAuthenticated) return <Navigate to={"/home"} />;
   return (
-    <div>
-      <section>
-        <form onSubmit={submitHandler}>
+    <section className="w-screen h-screen flex justify-center items-center ">
+      <form
+        onSubmit={submitHandler}
+        className=" flex flex-col space-y-2 rounded-md bg-white border-2 pb-4 border-black shadow-xl h-84 w-64"
+      >
+        <h1 className="translate-x-6 mt-3  font-bold text-2xl">SIGNUP</h1>
+        <div className="flex flex-col translate-x-3">
+          <h1 className="ml-3">Username</h1>
           <input
-            type="text"
-            placeholder="name"
-            value={name}
+            className="w-48 rounded-md h-8 ml-3 border-2 border-black shadow-md"
+            type="email"
+            placeholder="username"
+            value={email}
             onChange={(e) => setName(e.target.value)}
-            required
           />
+        </div>
+        <div className="flex flex-col translate-x-3">
+          <h1 className="ml-3">Email</h1>
           <input
+            className="w-48 rounded-md h-8 ml-3 border-2 border-black shadow-md"
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
+        </div>
+        <div className="flex flex-col translate-x-3">
+          <h1 className="ml-3">Password</h1>
           <input
+            className="w-48 h-8 ml-3 rounded-md border-2 border-black shadow-md"
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
-          <button type="submit">Sign Up</button>
-          <h4>Or</h4>
-          <Link to="/login">Log In</Link>
-        </form>
-      </section>
-    </div>
+        </div>
+        <button
+          type="submit"
+          className="w-20 h-8 font-bold translate-x-6 rounded-md  bg-green-600 text-white"
+        >
+          Sign Up
+        </button>
+        <div className="flex translate-x-6  space-x-2">
+          <h1>Already a User?</h1>
+          <Link to="/login" className="font-bold text-orange-600">
+            Log In
+          </Link>
+        </div>
+      </form>
+    </section>
   );
 };
 

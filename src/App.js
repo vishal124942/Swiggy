@@ -17,6 +17,8 @@ import Front from "./Authentication/Front.js";
 import "./index.css";
 import Login from "./Authentication/Login.js";
 import Register from "./Authentication/Register.js";
+import { AddUsername } from "./utils/ReduxStore/usernameSlice.js";
+import { useDispatch } from "react-redux";
 
 export const Context = createContext({
   IsAuthenticated: false,
@@ -28,6 +30,7 @@ export const Context = createContext({
 });
 
 const App = () => {
+  const dispatch = useDispatch();
   const [IsAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setloading] = useState(false);
   const [user, setUser] = useState({});
@@ -39,6 +42,7 @@ const App = () => {
       })
       .then((res) => {
         setUser(res.data.user);
+        dispatch(AddUsername(res.data.user.name));
         setIsAuthenticated(true);
       })
       .catch((error) => {
