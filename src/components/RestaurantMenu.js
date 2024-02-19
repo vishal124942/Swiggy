@@ -38,14 +38,13 @@ const RestaurantMenu = () => {
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
   if (!restaurantInfo || !ItemcardInfo) {
-    // Handle the case where restaurantInfo is undefined or null
     return <div>Error: Restaurant information not available</div>;
   }
   const categories =
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
       (c) =>
         c.card?.["card"]?.["@type"] ===
-        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        "type.googleapis.com/swiggy.presentation.food.v2.MenuCarousel"
     );
   console.log(categories);
   const { name, cuisines, costForTwoMessage } = restaurantInfo;

@@ -1,7 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, Navigate } from "react-router-dom";
 import BURGER from "../img/burger.png";
+import { Context } from "../App";
 const Front = () => {
+  const { IsAuthenticated } = useContext(Context);
+  if (IsAuthenticated) return <Navigate to={"/home"} />;
   return (
     <div className="flex  justify-between  w-screen">
       <div className="flex  justify-between  w-2/3">

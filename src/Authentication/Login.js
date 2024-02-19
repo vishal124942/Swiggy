@@ -40,6 +40,7 @@ const Login = () => {
     }
   };
   if (IsAuthenticated) return <Navigate to={"/"} />;
+
   return (
     <section className="w-screen h-screen flex justify-center items-center">
       <form
@@ -68,6 +69,7 @@ const Login = () => {
           />
         </div>
         <button
+          onClick={() => setIsAuthenticated(true)}
           disabled={loading}
           type="submit"
           className="w-20 h-8 font-bold translate-x-6 rounded-md  bg-green-600 text-white"

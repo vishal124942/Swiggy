@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { server } from "../utils/constants";
 import toast from "react-hot-toast";
@@ -7,7 +7,6 @@ import { useContext } from "react";
 import { Context } from "../App";
 
 const Register = () => {
-  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

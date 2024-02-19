@@ -6,29 +6,26 @@ import { Context } from "../App.js";
 import { server } from "../utils/constants.js";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { deleteUsername } from "../utils/ReduxStore/usernameSlice.js";
 const Header = () => {
-  const dispatch = useDispatch();
-  const Usern = useSelector((state) => state.username.Username);
   const navigate = useNavigate();
   const { setIsAuthenticated } = useContext(Context);
   const location = useLocation();
   const hideHeaderRoutes = ["/login", "/register", "/"];
   const showHeader = !hideHeaderRoutes.includes(location.pathname);
-  const LogoutHandler = async () => {
-    try {
-      await axios.get(`${server}/users/logout`, {
-        withCredentials: true,
-      });
-      toast.success("Logged Out Successfully");
-      navigate("/");
-      dispatch(deleteUsername());
-      setIsAuthenticated(false);
-    } catch (error) {
-      toast.error(error.response.data.message);
-      setIsAuthenticated(true);
-    }
-  };
+  // const LogoutHandler = async () => {
+  //   try {
+  //     await axios.get(`${server}/users/logout`, {
+  //       withCredentials: true,
+  //     });
+  //     toast.success("Logged Out Successfully");
+  //     navigate("/");
+  //     setIsAuthenticated(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("Error Logging Out");
+  //     setIsAuthenticated(true);
+  //   }
+  // };
   const cartItems = useSelector((store) => store.cart.items);
 
   return showHeader ? (
@@ -54,7 +51,15 @@ const Header = () => {
               Cart-({cartItems.length})
             </Link>
           </li>
-          <button onClick={LogoutHandler}> Logout</button>
+          <button
+            onClick={() => {
+              setIsAuthenticated(false);
+              navigate("/");
+            }}
+          >
+            {" "}
+            Logout
+          </button>
 
           <li className="px-4 pr-10 hover:underline duration-150 text-ellipsis">
             Hello
