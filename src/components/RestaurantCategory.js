@@ -1,8 +1,5 @@
-import ItemsList from "./itemsList";
-const RestaurantCategory = ({ data, ShowItems, setshowIndex }) => {
-  const handleClick = () => {
-    setshowIndex();
-  };
+import ItemsList from "./itemsList.js";
+const RestaurantCategory = ({ data, ShowItems, handleClick }) => {
   return (
     <div>
       {/* Header*/}

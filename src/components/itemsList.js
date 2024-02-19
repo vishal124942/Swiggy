@@ -1,46 +1,58 @@
 import { CDN_URL } from "../utils/constants";
-import { addItem } from "../utils/ReduxStore/cartSlice";
-import { useDispatch } from "react-redux";
+import { addItem, removeItem } from "../utils/ReduxStore/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 const ItemsList = ({ items }) => {
   const dispatch = useDispatch();
-  const handleAddItem = (item) => {
-    //Dispatching the Action
-    dispatch(addItem(item));
-  };
+  const entities = useSelector((store) => store.cart.items);
+  function handleItem(items) {
+    dispatch(addItem(items));
+  }
+
+  function remove() {
+    dispatch(removeItem());
+  }
   return (
-    <div>
+    <div className="grid gap-4 p-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2">
       {items.map((item) => (
         <div
           data-testid="foodItems"
           key={item.card.info.id}
-          className="p-2 m-2  border-gray-200 border-b-2 text-left flex justify-between "
+          className="p-4 border border-gray-300 rounded-lg bg-white hover:shadow-lg transition-transform transform hover:scale-105"
         >
-          <div className="w-9/12">
-            <div className="py-2">
-              <span className="font-bold">{item.card.info.name}</span>
-              <span className="font-bold">
-                -Rs {item.card.info.price / 100}
-              </span>
-            </div>
-            <p className="text-xs">{item.card.info.description}</p>
+          <div className="mb-4">
+            <p className="text-lg font-semibold">{item.card.info.name}</p>
+            <p className="text-sm text-gray-600">
+              ₹{item.card.info.price / 100 || item.card.info.defaultprice}
+            </p>
+            <p className="text-xs text-gray-500">
+              {item.card.info.description}
+            </p>
           </div>
-          <div className="w-3/12">
-            <div className="absolute ">
+          <div className="mb-4">
+            <img
+              src={CDN_URL + item.card.info.imageId}
+              className="w-full h-auto rounded-lg shadow-md"
+              alt="item"
+            />
+          </div>
+          <div className="flex justify-between items-center">
+            <div className="flex space-x-2">
               <button
-                className="p-2 text-green-500 bg-white shadow-lg w-24 m-auto z-10 rounded-sm translate-x-8 translate-y-24"
-                onClick={() => {
-                  handleAddItem(item);
-                }}
+                onClick={() => handleItem(item)}
+                className="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
               >
                 Add+
               </button>
+
+              {entities.length !== 0 && (
+                <button
+                  onClick={remove}
+                  className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2"
+                >
+                  Remove -
+                </button>
+              )}
             </div>
-            <img
-              src={CDN_URL + item.card.info.imageId}
-              className="rounded-lg"
-              alt=""
-              // onClick={RemoveItem}
-            />
           </div>
         </div>
       ))}
