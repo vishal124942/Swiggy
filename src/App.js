@@ -50,7 +50,7 @@ const App = () => {
         setUser({});
         setIsAuthenticated(false);
       });
-  }, []);
+  }, [dispatch]);
 
   return (
     <Context.Provider
