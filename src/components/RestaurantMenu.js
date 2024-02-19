@@ -1,53 +1,20 @@
-import { useState, useEffect } from "react";
-import Shimmer from "./Shimmer";
-// import Shimmer from "./Shimmer";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { data } from "../utils/RestaurantCategoryInfo";
 import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
-  const [resInfo, setresInfo] = useState(null);
   const [showIndex, setshowIndex] = useState(null);
-  var param = useParams();
-  // console.log(param.resId);
-  var urlID = param.resId;
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-  const fetchData = async () => {
-    try {
-      const fetchedData = await fetch(
-        " https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.746211029596637&lng=77.11815845221281&restaurantId=" +
-          urlID +
-          "&catalog_qa=undefined&submitAction=ENTER"
-      );
-      const jsonedData = await fetchedData.json();
-      console.log(jsonedData);
-      setresInfo(jsonedData.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  if (!resInfo) {
-    return <Shimmer />;
-  }
-
-  const restaurantInfo = resInfo?.cards[0]?.card?.card?.info;
-  const ItemcardInfo =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
-
-  if (!restaurantInfo || !ItemcardInfo) {
-    return <div>Error: Restaurant information not available</div>;
-  }
+  const dataMainCard = data.data?.cards?.[0]?.card.card.info;
   const categories =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+    data.data?.cards?.[2]?.groupedCard.cardGroupMap.REGULAR.cards.filter(
       (c) =>
-        c.card?.["card"]?.["@type"] ===
-        "type.googleapis.com/swiggy.presentation.food.v2.MenuCarousel"
+        c.card.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     );
+  //  console.log(data)
+
   console.log(categories);
-  const { name, cuisines, costForTwoMessage } = restaurantInfo;
+  const { name, cuisines, costForTwoMessage } = dataMainCard;
   // console.log(itemCards);
   return (
     <div className="text-center">

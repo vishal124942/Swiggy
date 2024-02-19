@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import Body from "../Body";
+import Body from "../Body.js";
 import MOCK_DATA from "../mocks/mockResListData.json";
 import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
