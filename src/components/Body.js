@@ -23,7 +23,7 @@ const Body = () => {
           </h1>
           <div className="relative">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 ">
-              {filtereddone || searchText ? (
+              {filtereddone || searchText.length !== 0 ? (
                 <img
                   onClick={() => {
                     setfilteredone(false);
