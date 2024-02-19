@@ -21,6 +21,7 @@ import { AddUsername } from "./utils/ReduxStore/usernameSlice.js";
 import { useDispatch } from "react-redux";
 
 export const Context = createContext({
+  username: "",
   IsAuthenticated: false,
   loading: false,
   user: {},

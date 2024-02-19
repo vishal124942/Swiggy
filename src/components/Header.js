@@ -3,9 +3,28 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../App.js";
+import axios from "axios";
+import { server } from "../utils/constants.js";
+import toast from "react-hot-toast";
 const Header = () => {
   const navigate = useNavigate();
-  const { setIsAuthenticated } = useContext(Context);
+  const { setIsAuthenticated, loading, setloading } = useContext(Context);
+  const LogoutHandler = async () => {
+    setloading(true);
+    try {
+      await axios.get(`${server}/users/logout`, {
+        withCredentials: true,
+      });
+      toast.success("Logged Out Successfully");
+      navigate("/");
+      setIsAuthenticated(false);
+      setloading(false);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      setIsAuthenticated(true);
+      setloading(false);
+    }
+  };
   const location = useLocation();
   const hideHeaderRoutes = ["/login", "/register", "/"];
   const showHeader = !hideHeaderRoutes.includes(location.pathname);
@@ -33,12 +52,7 @@ const Header = () => {
               Cart-({cartItems.length})
             </Link>
           </li>
-          <button
-            onClick={() => {
-              setIsAuthenticated(false);
-              navigate("/");
-            }}
-          >
+          <button disabled={loading} onClick={LogoutHandler}>
             {" "}
             Logout
           </button>
