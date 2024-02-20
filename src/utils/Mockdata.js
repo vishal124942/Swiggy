@@ -1,4 +1,4 @@
-export const restaurants = [
+export const MockData = [
   {
     info: {
       id: "40524",
