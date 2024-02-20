@@ -2,7 +2,7 @@ import RestaurantCard, { withPromotedLabel } from "./RestaurantCard.js";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../App.js";
-import { MockData } from "../utils/MockData.js";
+import { restaurants } from "../utils/data.js";
 import CROSS from "../img/close.png";
 const Body = () => {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const Body = () => {
             />
             <button
               onClick={() => {
-                const filteredRestaurant = MockData.filter((res) =>
+                const filteredRestaurant = restaurants.filter((res) =>
                   res.info.name.toLowerCase().includes(searchText.toLowerCase())
                 );
                 setfilteredRestaurant(filteredRestaurant);
@@ -78,7 +78,7 @@ const Body = () => {
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   onClick={() => {
                     setTopdone(false);
-                    setfilteredRestaurant(MockData);
+                    setfilteredRestaurant(restaurants);
                   }}
                 >
                   All Restaurants
@@ -87,7 +87,7 @@ const Body = () => {
                 <button
                   className="text-white mx-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   onClick={() => {
-                    const filteredList = MockData.filter(
+                    const filteredList = restaurants.filter(
                       (res) => res.info.avgRating > 4.3
                     );
                     setfilteredRestaurant(filteredList);
@@ -101,26 +101,27 @@ const Body = () => {
             </div>
           </div>
           <div className=" flex flex-wrap  items-center mx-8 w-screen ">
-            {(filtereddone ? filteredRestaurant : MockData).map((restaurant) =>
-              restaurant.info.avgRating <= 4 ? (
-                <Link
-                  to={`/restaurant/${restaurant?.info?.id}`}
-                  className="cursor-pointer hover:scale-105 duration-150"
-                >
-                  <PromotedRestaurantCard resData={restaurant} />
-                </Link>
-              ) : (
-                <Link
-                  to={`/restaurant/${restaurant?.info?.id}`}
-                  className="cursor-pointer hover:scale-105 duration-150"
-                >
-                  <RestaurantCard
-                    data-testid="resCard"
-                    key={restaurant.info.id}
-                    resData={restaurant}
-                  />
-                </Link>
-              )
+            {(filtereddone ? filteredRestaurant : restaurants).map(
+              (restaurant) =>
+                restaurant.info.avgRating <= 4 ? (
+                  <Link
+                    to={`/restaurant/${restaurant?.info?.id}`}
+                    className="cursor-pointer hover:scale-105 duration-150"
+                  >
+                    <PromotedRestaurantCard resData={restaurant} />
+                  </Link>
+                ) : (
+                  <Link
+                    to={`/restaurant/${restaurant?.info?.id}`}
+                    className="cursor-pointer hover:scale-105 duration-150"
+                  >
+                    <RestaurantCard
+                      data-testid="resCard"
+                      key={restaurant.info.id}
+                      resData={restaurant}
+                    />
+                  </Link>
+                )
             )}
           </div>
         </div>
