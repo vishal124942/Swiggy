@@ -13,25 +13,25 @@ const RestaurantMenu = () => {
   const handleClick = (index) => {
     setshowIndex((prevIndex) => (prevIndex === index ? null : index));
   };
-  const { name, cuisines, costForTwoMessage } = dataMainCard;
   return (
-    <div className="text-center h-screen overflow-x-scroll">
-      <h1 className="font-bold  my-6 text-2xl">{name}</h1>
-      <p className="font-bold text-lg">
-        {cuisines.join(",")}-{costForTwoMessage}
-      </p>
-      {/* {categories Accordion} */}
-      <div className=" ">
-        {categories.map((category, index) => (
-          <RestaurantCategory
-            key={categories.indexOf(category) + `${1}`}
-            data={category?.card?.card}
-            ShowItems={index === showIndex}
-            handleClick={() => handleClick(index)}
-          />
-        ))}
+    <section>
+      <div className="container my-8 mx-auto lg:max-w-[1200px]">
+        <h1> {dataMainCard?.name}</h1>
+        {dataMainCard?.cuisines?.[0]}
+        {dataMainCard?.costForTwoMessage}
+
+        <div>
+          {categories.map((category, index) => (
+            <RestaurantCategory
+              key={categories.indexOf(category) + `${1}`}
+              data={category?.card?.card}
+              ShowItems={index === showIndex}
+              handleClick={() => handleClick(index)}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 export default RestaurantMenu;

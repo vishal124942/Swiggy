@@ -5,11 +5,11 @@ const RestaurantCard = ({ resData }) => {
   return (
     <div
       data-testid="resCard"
-      className="w-full sm:w-[300px] md:w-[300px] lg:w-[300px] p-4 bg-white rounded-md shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105"
+      className="card-res w-full sm:w-[300px] md:w-[300px] lg:w-[300px] p-4 bg-white rounded-md shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105"
     >
       <div className="relative min-w-[180px] min-h-[180px] sm:w-[180px] md:w-[250px] lg:w-[270px] md:h-[180px] lg:h-[200px] sm:h-[180px] pb-3/4 overflow-hidden rounded-md">
         <img
-          className="absolute inset-0 h-full w-full object-cover rounded-md"
+          className=" inset-0 h-full w-full object-cover rounded-md"
           src={CDN_URL + resData.info.cloudinaryImageId}
           alt=""
         />

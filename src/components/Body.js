@@ -15,13 +15,13 @@ const Body = () => {
 
   if (!IsAuthenticated) navigate("/");
   return (
-    <section>
+    <section className="section-main">
       <div className="container-max my-8">
         <div className="my-16">
-          <h1 className="font-bold my-6 text-2xl text-zinc-700">
+          <h1 className=" heading font-bold my-6 text-2xl text-zinc-700">
             Restaurants with online food delivery in Delhi
           </h1>
-          <div className="relative">
+          <div className="search relative">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 ">
               {filtereddone || searchText.length !== 0 ? (
                 <img
@@ -71,7 +71,7 @@ const Body = () => {
               Search
             </button>
           </div>
-          <div className="py-5 flex bg-pink-50 my-1">
+          <div className="top-all py-5 flex bg-pink-50 my-1">
             <div className="">
               {Topdone ? (
                 <button
@@ -100,7 +100,7 @@ const Body = () => {
               )}
             </div>
           </div>
-          <div className=" flex flex-wrap  items-center mx-8 w-screen ">
+          <div className=" flex flex-wrap  items-center  mx-8 w-screen ">
             {(filtereddone ? filteredRestaurant : restaurants).map(
               (restaurant) =>
                 restaurant.info.avgRating <= 4 ? (

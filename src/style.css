@@ -16,3 +16,27 @@
 .container-max {
   margin-top: 100px;
 }
+@media (min-width: 375px) and (max-width: 400px) {
+  .container-max {
+    width: screen;
+  }
+  .section-main {
+    width: screen;
+    transform: translateX(14%);
+  }
+  .heading {
+    font-size: 30px;
+    width: screen;
+    text-align: center;
+    transform: translateX(15%);
+  }
+  .card-res {
+    width: screen;
+  }
+  .search {
+    width: 130%;
+  }
+  .top-all {
+    width: 130%;
+  }
+}

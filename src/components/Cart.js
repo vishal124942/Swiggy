@@ -13,23 +13,23 @@ const Cart = () => {
     dispatch(clearCart());
   };
   return IsAuthenticated ? (
-    <div className="text-center m-10 p-10">
-      <h1 className="text-2xl font-bold">Cart</h1>
-
-      {cartItems.length === 0 ? (
-        <h1>Your Cart is Empty please add items to it</h1>
-      ) : (
-        <div className="w-6/12 m-auto">
-          <button
-            className="p-2 m-2 bg-black text-white rounded-lg"
-            onClick={handleClearcart}
-          >
-            Clear Cart
-          </button>
+    <section>
+      <div className=" my-[100px]  mx-auto h-auto lg:max-w-[1200px]">
+        <h1 className="text-2xl  font-bold">Cart</h1>
+        {cartItems.length === 0 && <p>Your Cart is empty </p>}
+        <div className="my-4">
           <ItemsList items={cartItems} />
+          {cartItems.length !== 0 && (
+            <button
+              onClick={handleClearcart}
+              className="text-white bg-black rounded-lg p-2 m-2 "
+            >
+              Clear cart
+            </button>
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </section>
   ) : (
     <Navigate to={"/"} />
   );
